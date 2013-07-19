@@ -1,0 +1,9 @@
+function frames=red2frame(roj,params)
+
+%master function to extract all frame series
+
+[frames.frindices frames.rojinterv]=frextract(roj,params.thres);
+[frames.levels  frames.indlevel]= getlevels(roj,frames.rojinterv,params.cuts);
+[frames.startstim frames.endstim]=getredscreen(frames.frindices, frames.indlevel,params.minframes,params.level,params.maxstim);
+frames.times=roj(:,1);
+end

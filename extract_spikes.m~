@@ -1,0 +1,16 @@
+function [out outv]=extract_spikes(in,thresh)
+
+
+[spin2 spint2]=findpeaks(in(:,2),'minpeakheight',-10);
+
+for i=1:length(thres)-1
+    
+    [spin1 spint1]=findpeaks(sign(thresh(i))*in(:,2),'minpeakheight',sign(thresh(i))*thresh(i));
+    spint=diff(spint2,spint1);
+    spint2=spint1;
+    
+    out(i).t=in(spint,1);
+    out(i).v=in(spint,2);
+end
+
+end

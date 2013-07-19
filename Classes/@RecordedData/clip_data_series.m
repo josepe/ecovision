@@ -1,0 +1,45 @@
+function sprates=clip_data_series(spikes,writenframes,time_frame,fps,Fs)
+
+
+%variable time_frame in milliseconds before and after stimulation period
+
+
+ttb=time_frame(1);
+tta=time_frame(2);
+
+% find time bounds in samples%
+tb=time_frame(1)*Fs/1000;
+ta=time_frame(2)*Fs/1000;
+
+vframes=min(writenframes):max(writenframes);
+
+sprates=cell(size(spikes,1),size(vframes,1)-1);
+
+
+for i=vframes(2):vframes(end)
+    ind_high=find(writenframes==i);
+    t00=min(ind_high);
+    t11=max(ind_high);
+    %convert from frame to sample indices
+    t0=t00/fps *Fs;
+    t1=t11/fps *Fs;
+    tbb=t0-tb;
+    taa=t1+ta;
+    
+    %convert from sample indices to time (in seconds)
+    tt0 = t00/fps;
+    tt1 = t11/fps;
+    ttb = tt0-time_frame(1)/1000;
+    tta = tt1+time_frame(2)/1000;
+    
+    for j=1:length(spikes)
+        % count spikes before
+        spb=length(find(spikes{j}>tbb&spikes{j}<t0));
+        sps=length(find(spikes{j}>t0&spikes{j}<t1));
+        spa=length(find(spikes{j}>t1&spikes{j}<taa));
+        sprates{j,i}=[spb/(tt0-ttb) sps/(tt1-tt0) spa/(tta-tt1)];
+    end    
+    
+   
+end
+end

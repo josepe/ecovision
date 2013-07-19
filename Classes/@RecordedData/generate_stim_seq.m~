@@ -1,0 +1,9 @@
+function out=generate_stim_seq(back,stim,repetitions)
+stseq=[];
+for i=1:repetitions:
+stseqi=[ones(1,back) i*ones(1,stim)];
+stseq=[stseq stseqi
+
+end
+
+end

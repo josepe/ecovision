@@ -1,0 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mycommand = ['!','ffmpeg',' -i ',file,' ',outputFolder,'/image%d.png']; 
+
+
+
+
+system(mycommand)                             % Command is evaluated here...

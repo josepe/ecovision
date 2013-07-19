@@ -1,0 +1,4 @@
+function a= gen_stims_images(z)
+         w=1;   
+        a=z+w;    
+end

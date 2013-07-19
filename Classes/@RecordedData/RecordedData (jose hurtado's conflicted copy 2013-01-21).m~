@@ -1,0 +1,81 @@
+classdef RecordedData
+    properties(Constant)
+        RGB=struct('R', 1, 'G', 2,'B', 3);
+    end
+    
+    properties (Hidden)
+        colorLevels
+        yblk 
+        stimStructFile  %file where stimulus structure is stored, if any
+        stimGenerator   %stimulus generator file
+            fotogDir        %directory where photograms are stored
+        stimStruct      %stim data structure from stimparamsfile
+        
+        %%%%%%%%%%%%%% Sampling frequency, usually 20khz %%%%%%%%%%%%
+        sampFreq=20000;
+        
+        
+    end
+    
+    properties
+        dataDir         %data directory
+        dataFiles       %data files structure array     
+        syncSignal      %channel 64
+        stimSequenceFr  %stimulus sequence in frames
+        stimSequenceT   %stimulus sequence in timestamps                  
+        dataChan        %data channels stored in object
+        color           %stimulus color levels
+        data            %response data
+     %  time            %time grid of records (in s) BETTER COMPUTE ON THE SPOT
+    end
+    
+    
+    methods
+        %Constructor
+        function RD = RecordedData(stimparamsfile,datadir,color)
+            run(stimparamsfile);
+            RD.dataDir=datadir;
+            RD.stimStructFile=stimparamsfile;
+            RD.stimStruct=stim;
+            RD.dataFiles=RD.obtain_data_files(datadir) ;
+            RD.color=color;
+            RD.data=RD.readdata_dir(RD.dataFiles);
+            %RD.dataDir = pwd;
+            RD.stimSequenceFr = stim.writtenframes;
+            %RD.dataChan=datachan
+            %RD.syncSignal 
+        end
+        
+    end % methods
+    
+    methods (Static)
+        
+        out=obtain_data_files(in)      
+        
+        out=gen_red_bar_sequence(sin)
+        
+        [outdata,outsync]=readdata_dir(in,channels,number_of_blocks,points_per_block)     
+        
+        out=filtering(in,fs,fobj)
+        
+        out=get_spikes(in,fs) %spike times (points) in single channel
+        
+        out=spikeExtract(in,fs) %return spike times (data points per channel)
+        
+        [sptimes_out,stim_out]=align_stim_response(sptimes_in,stim_in,fps,Fs,t_retraso)
+        
+        sprates=clip_data_series(spikes,writenframes,time_frame,fps,Fs)
+        
+        plot_response_curves(spa0,channels,colors,GB)
+        
+        timegrid() %compute timegrid
+        
+        plotSpikes() %plot spikes
+        
+        parse() 
+    end
+        
+        
+    
+    
+end  % classdef

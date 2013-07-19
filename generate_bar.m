@@ -1,0 +1,63 @@
+function y=generate_bar(box_side,dimensions,angle,pos_along_path,parallel_distance,speed,fps,color)
+% units
+% create square image side=box_side, length=barl
+ 
+    
+    %%% generate bar(central)
+    bar=zeros(box_side); %bounding box
+    halflength=dimensions(1)/2;
+    halfwidth=dimensions(2)/2;
+    bar((box_side/2-halflength:box_side/2+halflength-1),box_side/2-halfwidth:box_side/2+halfwidth-1)=ones(dimensions(1),dimensions(2));
+    
+    bar=imrotate(bar,angle,'bilinear','crop'); %rotate bar
+    
+    [row,col,v] = find(bar);
+    anrd=angle*2*pi/360;
+    posx=round(pos_along_path*sin(anrd));
+    posy=round(pos_along_path*cos(anrd));
+    
+    parx=round(parallel_distance*cos(anrd));
+    pary=-round(parallel_distance*sin(anrd));
+    
+    bar2=sparse(row-posx-parx,col-posy-pary,v,size(bar,1),size(bar,2));
+    y=full(bar2);
+    
+    
+%     G=color(2);
+%     B=color(3);
+%     ba=cat(3,zeros(size(bar,1),size(bar,2)),G*bar,B*bar);
+%     
+%     %shift position
+%     % along movement path
+%     
+%     
+%     %   compute translation vector depending on angle
+%     bar=bar+coordinates;                        %   translate bars to new coordinates
+%     bar=rotate_bar;                             %   rotate ba
+%     bar=imrotate(bar,angle,'bilinear','crop');  %   rotate bar
+%     cut_box;                %   clip surrounding box
+%     
+%     
+%     
+%    
+%     
+%     
+%     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 bar=imrotate(bar,p,'bilinear','crop'); %rotate bar
+%                 ba=cat(3,zeros(size(bar,1),size(bar,2)),G*bar,B*bar);
+%                 eval(['ba' num2str(l) '=ba(101:700,101:700,:);']);
+%                 ip=ip+3;
+%             
+           
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+end

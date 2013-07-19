@@ -1,0 +1,18 @@
+function out=sta_frindices(spkt,frames,N)
+% for each spike-time returns a row with up to N frames previous frame indices
+% if input is multiple spike times (vector), returns a matrix, one row per
+% spike
+%out=zeros(length(spkt),N);
+k=1;
+for i =1:length(spkt)
+    %find second to previous frame
+    sptfrt=find(frames.times(frames.frindices)<=spkt(i),2,'last');
+    if ~isempty(sptfrt)
+        if N<=sptfrt(1)
+            out(k,:)=sptfrt(1):-1:sptfrt(1)-(N-1);
+            k=k+1;
+        end
+    end
+    
+end
+end

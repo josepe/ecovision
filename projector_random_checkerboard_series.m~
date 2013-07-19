@@ -1,0 +1,84 @@
+function y=projector_random_checkerboard_series(G,B,sideout,upperleft)
+%G,B level of green and blue in ON squares
+%upperleft=[100 100];
+%prepared for 30fps
+
+%base background image
+yblk=generate_RGB_rectangle_image(sideout-20,sideout,0,0,0);
+
+%define R channel sequence
+depth=(32+56*[1 2 3 4])/256;
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%background image sequence %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+yr1=generate_RGB_rectangle_image(20,sideout,depth(1),0,0);
+yr2=generate_RGB_rectangle_image(20,sideout,depth(2),0,0);
+yr3=generate_RGB_rectangle_image(20,sideout,depth(3),0,0);
+yr4=generate_RGB_rectangle_image(20,sideout,depth(4),0,0);
+
+im1=cat(1,yblk,yr1);
+im2=cat(1,yblk,yr2);
+im3=cat(1,yblk,yr3);
+im4=cat(1,yblk,yr4);    
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% stim image sequence %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%stand alone stimulus image %%
+
+
+
+
+
+
+%1000 ms inversion period
+% K=number of stimuli presentations
+% n?mero total de frames por ciclo =160 on 160 off + 60 background =380
+
+in=0;
+%%%%%BACKGROUND%%%%%
+    for i=0:4:59
+        % dark background
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(im1,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(im2,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(im3,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(im4,[ file_index(2:end) '.png'],'png');
+        
+    end  
+    
+    for i=0:4:200
+        zrn= randi([0,1],[20,20]);zrnr=kron(zrn,ones(30));chk_on=cat(3,zeros(size(check_on,1),size(check_on,2)),G*zrnr,B*zrnr);
+        zrn= randi([0,1],[20,20]);zrnr=kron(zrn,ones(30));chk_on=cat(3,zeros(size(check_on,1),size(check_on,2)),G*zrnr,B*check_on);
+        zrn= randi([0,1],[20,20]);zrnr=kron(zrn,ones(30));chk_on=cat(3,zeros(size(check_on,1),size(check_on,2)),G*check_on,B*check_on);
+        zrn= randi([0,1],[20,20]);zrnr=kron(zrn,ones(30));chk_on=cat(3,zeros(size(check_on,1),size(check_on,2)),G*check_on,B*check_on);
+        
+        
+        
+        ran1=embed_matrix_RGB(im1,zrn1,upperleft);
+        ran2=embed_matrix_RGB(im2,zrn2,upperleft);
+        ran3=embed_matrix_RGB(im3,zrn3,upperleft);
+        ran4=embed_matrix_RGB(im4,zrn4,upperleft);
+        
+        
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(ran1,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(ran2,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(ran3,[ file_index(2:end) '.png'],'png');
+        file_index=num2str(in+1000000);in=in+1;
+        imwrite(ran4,[ file_index(2:end) '.png'],'png');
+        
+        
+    end
+    
+
+y=0;

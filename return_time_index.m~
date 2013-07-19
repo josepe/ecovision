@@ -1,0 +1,5 @@
+function y=return_time_index(indexed_series,time)
+
+
+time_di
+time=min(abs(indexed_series-time)

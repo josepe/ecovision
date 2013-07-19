@@ -1,0 +1,22 @@
+function out=obtain_data_files(in)
+% loads all data files in a directory and concatenates data series
+% can select rows to concatenate and decimate
+% y returns stimulus vector (0=stimulus off, 1= stimulus on) 
+
+%code does not allocate memory
+
+data=[];
+stim=[];
+di=dir(in);
+j=0;
+for i=1:length(di)
+    if ~isempty(regexp(di(i).name, '[0-9].dat$', 'once'))
+        j=j+1;
+        dat1(j).name=di(i).name;
+        dat1(j).name
+        
+    end
+end
+out=dat1;
+end
+

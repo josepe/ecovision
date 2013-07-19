@@ -1,0 +1,7 @@
+function y=generate_RGB_rectangle_image(length,width,R,G,B)
+
+yr=R*ones(len);
+yg=G*ones(side);
+yb=B*ones(side);
+
+y=cat(3,yr,yg,yb);

@@ -1,0 +1,8 @@
+%function y = decimateLFP_1k()
+%decimate all imp signals in workspace to 1kHz
+ws=whos('int*')
+for i=1:length(ws)
+    eval(['intf5=decimate(' ws(i).name ,5);']);
+    intf1=decimate(intf5,4);
+    eval(['d' ws(i).name '=intf1;']);
+end

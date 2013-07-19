@@ -1,0 +1,21 @@
+function [sptimes_out,stim_out]=align_stim_response(sptimes_in,stim_in,fps,Fs,t_retraso)
+
+%t_retraso (ms) >0 inicio registro antes que est?mulo
+
+tr_dp=Fs * t_retraso /1000; %convert t_retraso from ms to sampling points
+tr_fr=round(fps*t_retraso /1000)      ; %convert t_retraso from ms to frames
+sptimes_out=sptimes_in{i}
+if t_retraso > 0
+    for i=1:length(sptimes_in)
+        sptimes=sptimes_in{i}-tr_dp ;
+        sptimes=sptimes(sptimes>0);
+        sptimes_out{i}=sptimes;
+        stim_out=stim_in;
+    end
+    
+else
+    stim=stim_in(tr_fr:end);
+    stim_out=stim;
+    sptimes_out=sptimes_in;
+end
+end

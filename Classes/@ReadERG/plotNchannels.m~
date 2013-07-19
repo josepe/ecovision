@@ -1,0 +1,16 @@
+function plotNchannels(rootfile,session,chans,writtenframes,fps,Fs)
+
+
+%variable time_frame in milliseconds before and after stimulation period
+for i=1:length(chans)
+    
+    finame=['e' num2str(chan(i) rootfile];
+    load(finame);
+    [y t]=generate_event_time_series_from_stim_times(writtenframes,Fs,fps,number_recorded_points)
+    
+    figure,plot(t,signal_ne)
+
+
+
+
+end

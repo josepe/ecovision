@@ -1,0 +1,11 @@
+function y=generate_RGB_square_frame(sidein,sideout,Ri,Gi,Bi,Ro,Go,Bo)
+
+yr=R*ones(length,width);
+yg=G*ones(length,width);
+yb=B*ones(length,width);
+
+
+
+
+
+y=cat(3,yr,yg,yb);

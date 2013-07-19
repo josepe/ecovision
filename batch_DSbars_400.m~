@@ -1,0 +1,25 @@
+%batch generate bars 400x400 120u/s 30pix/s 30fps 1px/frame
+
+cd('./bars00')
+generate_moving_bars_400(0)
+
+cd('../bars45')
+generate_moving_bars_400(45)
+
+cd('../bars90')
+generate_moving_bars_400(90)
+
+cd('../bars135')
+generate_moving_bars_400(135)
+
+cd('../bars180')
+generate_moving_bars_400(180)
+
+cd('../bars225')
+generate_moving_bars_400(225)
+
+cd('../bars270')
+generate_moving_bars_400(270)
+
+cd('../bars315')
+generate_moving_bars_400(315)

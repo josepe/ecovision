@@ -1,0 +1,5 @@
+out=spikeExtract(in,fs) %return spike times (data points per channel) in cell array
+
+for k=1:size(in,2)
+out=get_spikes(in(k),fs);
+

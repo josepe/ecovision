@@ -1,0 +1,9 @@
+function y=interp_times_stimuli(stim_times,timesteps)
+
+%function y=interp_times_stimuli(stim_times,timesteps)
+%returns points in time_steps series (series of time points) nearest to
+%stim_times
+
+pp=interp1(1:length(timesteps),timesteps,stim_times,'nearest');
+    
+    

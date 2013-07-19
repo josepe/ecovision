@@ -1,0 +1,7 @@
+function RedSeq=gen_red_bar_sequence(st)
+seq=1:10;
+st=1:3;
+x=length(st);
+z=kron(ones(1,ceil(length(seq)/x)),st);
+RedSeq=z(1:length(seq));
+
